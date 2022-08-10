@@ -9,8 +9,6 @@ let latitud, longitud;
 function showPosition(position) {
     latitud=position.coords.latitude;
     longitud=position.coords.longitude;
-  x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude+"<br>";
   // Json
 fetch("https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/")
 .then((resp) => resp.json())
@@ -29,20 +27,20 @@ fetch("https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosC
     gasolinerasProvincia.sort((a, b) => {
         return a.km - b.km;
     });
-    gasolinerasProvincia=gasolinerasProvincia.slice(0,10);
+    gasolinerasProvincia=gasolinerasProvincia.slice(0,20);
     console.log(gasolinerasProvincia);
     gasolinerasProvincia.forEach(element => {
         x.innerHTML+=`<div class="col">
         <div class="card">
           <a
-            href=""
+            href="https://maps.google.com/?q=`+element.datos.Latitud.replace(",", ".")+`,`+element.datos["Longitud (WGS84)"].replace(",", ".")+`"
             class="btn btn-light btn-lg active"
             role="button"
             aria-pressed="true"
           >
             `+element.datos.Rótulo+` 
-            <span class="badge text-bg-secondary">95: `+element.datos['Precio Gasolina 95 E5']+` L/€</span>
-            <span class="badge text-bg-secondary">A: `+element.datos['Precio Gasoleo A']+` L/€</span>
+            <span class="badge text-bg-secondary gasolina" style="display:none">95: `+element.datos['Precio Gasolina 95 E5']+` L/€</span>
+            <span class="badge text-bg-secondary diesel" style="display:none">A: `+element.datos['Precio Gasoleo A']+` L/€</span>
             <span class="badge text-bg-warning">`+element.km+`KM</span>
           </a>
         </div>
@@ -54,6 +52,27 @@ fetch("https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosC
 });
 }
 
+function gasolina() {
+  let gasolinas=document.getElementsByClassName("gasolina");
+  let diesels=document.getElementsByClassName("diesel");
+  for (const iterator of gasolinas) {
+    iterator.style.display = "inline";
+  };
+  for (const iterator of diesels) {
+    iterator.style.display = "none";
+  };
+}
+
+function diesel() {
+  let gasolinas=document.getElementsByClassName("gasolina");
+  let diesels=document.getElementsByClassName("diesel");
+  for (const iterator of diesels) {
+    iterator.style.display = "inline";
+  };
+  for (const iterator of gasolinas) {
+    iterator.style.display = "none";
+  };
+}
 
 
 
