@@ -1,11 +1,9 @@
 // Posicion
 var x = document.getElementById("demo");
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else { 
-    x.innerHTML = "Geolocation is not supported by this browser.";
-  }
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(showPosition);
+} else { 
+  x.innerHTML = "Geolocation is not supported by this browser.";
 }
 let latitud, longitud;
 function showPosition(position) {
@@ -20,20 +18,22 @@ fetch("https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosC
     let gasolineras=data.ListaEESSPrecio;
     let gasolinerasProvincia=[];
     gasolineras.forEach(element => {
+      if(element.Provincia == "ARABA/ÁLAVA"){
         const gasolinera = {
-            datos: element,
-            km: Dist(latitud,longitud,parseInt(element.Latitud),parseInt(element["Longitud (WGS84)"]))
-            };
-        if(gasolinera.km<70){
-            gasolinerasProvincia.push(gasolinera);
-        }
+          datos: element,
+          km: Dist(latitud,longitud,parseInt(element.Latitud),parseInt(element["Longitud (WGS84)"]))
+          };
+          gasolinerasProvincia.push(gasolinera);
+      }
+        
+          
     });
     gasolinerasProvincia.sort((a, b) => {
         return a.km - b.km;
     });
     console.log(gasolinerasProvincia);
     gasolinerasProvincia.forEach(element => {
-        x.innerHTML+=element.km+" "+element.datos["C.P."]+" "+element.datos.Rótulo+"<br>";
+        x.innerHTML+=element.km+" "+element.datos["C.P."]+" "+element.datos.Rótulo+" "+element.datos.Localidad+"<br>";
     });
 })
 .catch(function(error) {
