@@ -32,7 +32,21 @@ fetch("https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosC
     gasolinerasProvincia=gasolinerasProvincia.slice(0,10);
     console.log(gasolinerasProvincia);
     gasolinerasProvincia.forEach(element => {
-        x.innerHTML+=element.km+" "+element.datos["C.P."]+" "+element.datos.Rótulo+" "+element.datos.Localidad+" "+element.datos.Latitud+" "+element.datos["Longitud (WGS84)"]+"<br>";
+        x.innerHTML+=`<div class="col">
+        <div class="card">
+          <a
+            href=""
+            class="btn btn-light btn-lg active"
+            role="button"
+            aria-pressed="true"
+          >
+            `+element.datos.Rótulo+` 
+            <span class="badge text-bg-secondary">95: `+element.datos['Precio Gasolina 95 E5']+` L/€</span>
+            <span class="badge text-bg-secondary">A: `+element.datos['Precio Gasoleo A']+` L/€</span>
+            <span class="badge text-bg-warning">`+element.km+`KM</span>
+          </a>
+        </div>
+      </div>`;
     });
 })
 .catch(function(error) {
@@ -55,5 +69,5 @@ function Dist(lat1, lon1, lat2, lon2) {
     var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLong / 2) * Math.sin(dLong / 2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c;
-    return d.toFixed(3);
+    return d.toFixed(2);
 }
