@@ -33,7 +33,7 @@ fetch("https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosC
     });
     console.log(gasolinerasProvincia);
     gasolinerasProvincia.forEach(element => {
-        x.innerHTML+=element.km+" "+element.datos["C.P."]+" "+element.datos.Rótulo+" "+element.datos.Localidad+"<br>";
+        x.innerHTML+=element.km+" "+element.datos["C.P."]+" "+element.datos.Rótulo+" "+element.datos.Localidad+" "+element.datos.Latitud+" "+element.datos["Longitud (WGS84)"]+"<br>";
     });
 })
 .catch(function(error) {
