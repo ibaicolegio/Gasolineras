@@ -21,7 +21,7 @@ fetch("https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosC
       if(element.Provincia == "ARABA/ÁLAVA"){
         const gasolinera = {
           datos: element,
-          km: Dist(latitud,longitud,parseInt(element.Latitud),parseInt(element["Longitud (WGS84)"]))
+          km: Dist(latitud,longitud,parseInt(element.Latitud.replace(",", ".")),parseInt(element["Longitud (WGS84)"].replace(",", ".")))
           };
           gasolinerasProvincia.push(gasolinera);
       }
@@ -56,5 +56,5 @@ function Dist(lat1, lon1, lat2, lon2) {
     var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLong / 2) * Math.sin(dLong / 2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c;
-    return d.toFixed(3);//Retorna tres decimales
+    return d;
 }
