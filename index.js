@@ -18,19 +18,18 @@ fetch("https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosC
     let gasolineras=data.ListaEESSPrecio;
     let gasolinerasProvincia=[];
     gasolineras.forEach(element => {
-      if(element.Provincia == "ARABA/ÁLAVA"){
+        let latitud2=element.Latitud.replace(",", ".");
+        let longitud2=element["Longitud (WGS84)"].replace(",", ".");
         const gasolinera = {
           datos: element,
-          km: Dist(latitud,longitud,parseInt(element.Latitud.replace(",", ".")),parseInt(element["Longitud (WGS84)"].replace(",", ".")))
+          km: Dist(latitud,longitud,latitud2,longitud2)
           };
           gasolinerasProvincia.push(gasolinera);
-      }
-        
-          
     });
     gasolinerasProvincia.sort((a, b) => {
         return a.km - b.km;
     });
+    gasolinerasProvincia=gasolinerasProvincia.slice(0,10);
     console.log(gasolinerasProvincia);
     gasolinerasProvincia.forEach(element => {
         x.innerHTML+=element.km+" "+element.datos["C.P."]+" "+element.datos.Rótulo+" "+element.datos.Localidad+" "+element.datos.Latitud+" "+element.datos["Longitud (WGS84)"]+"<br>";
@@ -56,5 +55,5 @@ function Dist(lat1, lon1, lat2, lon2) {
     var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLong / 2) * Math.sin(dLong / 2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c;
-    return d;
+    return d.toFixed(3);
 }
