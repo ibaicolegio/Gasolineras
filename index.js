@@ -12,7 +12,7 @@ function showPosition(position) {
     latitud=position.coords.latitude;
     longitud=position.coords.longitude;
   x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude;
+  "<br>Longitude: " + position.coords.longitude+"<br>";
   // Json
 fetch("https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/")
 .then((resp) => resp.json())
@@ -33,7 +33,7 @@ fetch("https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosC
     });
     console.log(gasolinerasProvincia);
     gasolinerasProvincia.forEach(element => {
-        x.innerHTML+=element.km+"<br>";
+        x.innerHTML+=element.km+" "+element.datos["C.P."]+" "+element.datos.Rótulo+"<br>";
     });
 })
 .catch(function(error) {
