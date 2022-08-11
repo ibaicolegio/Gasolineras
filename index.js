@@ -7,7 +7,8 @@ if (navigator.geolocation) {
 }
 let latitud,
   longitud,
-  gasolinerasProvincia = [];
+  gasolinerasProvincia = []
+  todasGasolinerasProvincia = [];
 function showPosition(position) {
   latitud = position.coords.latitude;
   longitud = position.coords.longitude;
@@ -26,13 +27,13 @@ function showPosition(position) {
           datos: element,
           km: Dist(latitud, longitud, latitud2, longitud2),
         };
-        gasolinerasProvincia.push(gasolinera);
+        todasGasolinerasProvincia.push(gasolinera);
       });
-      gasolinerasProvincia.sort((a, b) => {
+      todasGasolinerasProvincia.sort((a, b) => {
         return a.km - b.km;
       });
-      gasolinerasProvincia = gasolinerasProvincia.slice(0, 20);
-      console.log(gasolinerasProvincia);
+
+      gasolinerasProvincia = todasGasolinerasProvincia.slice(0, 50);
       dibujar(gasolinerasProvincia);
     })
     .catch(function (error) {
@@ -48,7 +49,13 @@ function gasolina() {
     if(b.datos["Precio Gasolina 95 E5"]==""){
       b.datos["Precio Gasolina 95 E5"]="N/A";
     }
-    return a.datos["Precio Gasolina 95 E5"] - b.datos["Precio Gasolina 95 E5"];
+    if ( a.datos["Precio Gasolina 95 E5"] < b.datos["Precio Gasolina 95 E5"] ){
+      return -1;
+    }
+    if ( a.datos["Precio Gasolina 95 E5"] > b.datos["Precio Gasolina 95 E5"] ){
+      return 1;
+    }
+    return 0;
   });
   dibujar(gasolinerasProvincia);
   let gasolinas = document.getElementsByClassName("gasolina");
@@ -62,8 +69,18 @@ function gasolina() {
   gasolinerasProvincia.sort((a, b) => {
     return a.datos["Precio Gasolina 95 E5"] - b.datos["Precio Gasolina 95 E5"];
   });
+}
 
-  console.log(gasolinerasProvincia);
+function cantidad(cant) {
+  gasolinerasProvincia = todasGasolinerasProvincia.slice(0, cant);
+  if(document.getElementsByClassName("gasolina")[0].style.display == "inline"){
+    gasolina();
+  } else if(document.getElementsByClassName("diesel")[0].style.display == "inline"){
+    diesel();
+  } else {
+    dibujar(gasolinerasProvincia);
+  }
+
 }
 
 function diesel() {
@@ -74,7 +91,13 @@ function diesel() {
     if(b.datos["Precio Gasoleo A"]==""){
       b.datos["Precio Gasoleo A"]="N/A";
     }
-    return a.datos["Precio Gasoleo A"] - b.datos["Precio Gasoleo A"];
+    if ( a.datos["Precio Gasoleo A"] < b.datos["Precio Gasoleo A"] ){
+      return -1;
+    }
+    if ( a.datos["Precio Gasoleo A"] > b.datos["Precio Gasoleo A"] ){
+      return 1;
+    }
+    return 0;
   });
   dibujar(gasolinerasProvincia);
   let gasolinas = document.getElementsByClassName("gasolina");
