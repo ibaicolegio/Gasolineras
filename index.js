@@ -118,9 +118,18 @@ function diesel() {
 function dibujar(gasolinerasProvincia) {
   x.innerHTML = "";
   gasolinerasProvincia.forEach((element) => {
+    let apertura="";
+    let fondo="";
+    if(element.datos['Tipo Venta']=='P'){
+      apertura="Publica";
+      fondo="bg-success";
+    } else{
+      apertura="Privada";
+      fondo="bg-warning";
+    }
     x.innerHTML +=
       `<div class="col">
-  <div class="card">
+  <div class="card `+ fondo +`">
     <a
       href="https://maps.google.com/?q=` +
       element.datos.Latitud.replace(",", ".") +
@@ -143,7 +152,10 @@ function dibujar(gasolinerasProvincia) {
       <span class="badge text-bg-warning">` +
       element.km +
       `KM</span>
-    </a>
+    </a>` +
+    element.datos.Horario
+     +
+    `
   </div>
 </div>`;
   });
