@@ -129,7 +129,7 @@ function dibujar(gasolinerasProvincia) {
     }
     x.innerHTML +=
       `<div class="col">
-  <div class="card `+ fondo +`">
+  <div class="card mt-2 `+ fondo +`">
     <a
       href="https://maps.google.com/?q=` +
       element.datos.Latitud.replace(",", ".") +
