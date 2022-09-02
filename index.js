@@ -9,7 +9,7 @@ let latitud,
   longitud,
   gasolinerasProvincia = []
   todasGasolinerasProvincia = [],
-  mensaje='<span class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-primary">Mas cercana</span>';
+  mensaje='<span class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-primary">Cercana</span>';
 function showPosition(position) {
   latitud = position.coords.latitude;
   longitud = position.coords.longitude;
@@ -44,7 +44,7 @@ function showPosition(position) {
 }
 
 function gasolina() {
-  mensaje='<span class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-primary">Mas barata</span>';
+  mensaje='<span class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-primary">Barata</span>';
   gasolinerasProvincia.sort((a, b) => {
     if(a.datos["Precio Gasolina 95 E5"]==""){
       a.datos["Precio Gasolina 95 E5"]="N/A";
@@ -87,7 +87,7 @@ function cantidad(cant) {
 }
 
 function diesel() {
-  mensaje='<span class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-primary">Mas barata</span>';
+  mensaje='<span class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-primary">Barata</span>';
   gasolinerasProvincia.sort((a, b) => {
     if(a.datos["Precio Gasoleo A"]==""){
       a.datos["Precio Gasoleo A"]="N/A";
