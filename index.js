@@ -135,7 +135,7 @@ function dibujar(gasolinerasProvincia) {
       fondo50="bg-secondary bg-gradient";
     }
     x.innerHTML +=
-      `<div class="col">
+      `<div class="col w-75 mx-auto">
   <div class="card mt-2 fs-6 mt-4 `+ fondo50 +`">
     <a
       href="https://maps.google.com/?q=` +
