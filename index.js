@@ -18,6 +18,7 @@ function showPosition(position) {
   )
     .then((resp) => resp.json())
     .then(function (data) {
+      document.getElementById("cargando").style.display="none";
       let gasolineras = data.ListaEESSPrecio;
       gasolinerasProvincia = [];
       gasolineras.forEach((element) => {
@@ -120,23 +121,26 @@ function dibujar(gasolinerasProvincia) {
   gasolinerasProvincia.forEach((element) => {
     let apertura="";
     let fondo="";
+    let fondo50="";
     if(element.datos['Tipo Venta']=='P'){
       apertura="Publica";
       fondo="bg-success";
+      fondo50="bg-secondary bg-gradient";
     } else{
       apertura="Privada";
-      fondo="bg-warning";
+      fondo="bg-danger";
+      fondo50="bg-secondary bg-gradient";
     }
     x.innerHTML +=
       `<div class="col">
-  <div class="card mt-2 fs-6 `+ fondo +`">
+  <div class="card mt-2 fs-6 `+ fondo50 +`">
     <a
       href="https://maps.google.com/?q=` +
       element.datos.Latitud.replace(",", ".") +
       `,` +
       element.datos["Longitud (WGS84)"].replace(",", ".") +
       `"
-      class="btn btn-light btn-lg active fs-6"
+      class="btn btn-light btn-lg active fs-6 `+ fondo +`"
       role="button"
       aria-pressed="true"
     >
