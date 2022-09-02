@@ -124,7 +124,7 @@ function dibujar(gasolinerasProvincia) {
     let fondo50="";
     if(element.datos['Tipo Venta']=='P'){
       apertura="Publica";
-      fondo="bg-success";
+      fondo="bg-success bg-gradient";
       fondo50="bg-secondary bg-gradient";
     } else{
       apertura="Privada";
