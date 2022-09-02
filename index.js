@@ -126,11 +126,11 @@ function dibujar(gasolinerasProvincia) {
     let fondo="";
     let fondo50="";
     if(element.datos['Tipo Venta']=='P'){
-      apertura="Publica";
+      apertura="";
       fondo="bg-success bg-gradient";
       fondo50="bg-secondary bg-gradient";
     } else{
-      apertura="Privada";
+      apertura='<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">Privada</span>';
       fondo="bg-danger";
       fondo50="bg-secondary bg-gradient";
     }
@@ -159,9 +159,7 @@ function dibujar(gasolinerasProvincia) {
       <span class="badge text-bg-warning">` +
       element.km +
       `KM</span>
-      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill `+ fondo +`">
-        `+apertura+`
-      </span>
+      `+apertura+`
       `+mensaje+`
     </a>` +
     element.datos.Horario
