@@ -152,10 +152,10 @@ function dibujar(gasolinerasProvincia) {
       ` 
       <span class="badge text-bg-secondary gasolina" style="display:none">95: ` +
       element.datos["Precio Gasolina 95 E5"] +
-      ` L/€</span>
+      ` €/L</span>
       <span class="badge text-bg-secondary diesel" style="display:none">A: ` +
       element.datos["Precio Gasoleo A"] +
-      ` L/€</span>
+      ` €/L</span>
       <span class="badge text-bg-warning">` +
       element.km +
       `KM</span>
